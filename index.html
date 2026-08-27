@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals API · AI Signal Feed | 4 sources, one screen</title>
+<style>
+  :root { --bg:#f6f8fa; --card:#fff; --line:#d0d7de; --text:#1f2328; --muted:#57606a; --blue:#0969da; --green:#1a7f37; --orange:#9a6700; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif; margin:0; background:var(--bg); color:var(--text); line-height:1.7; }
+  header { background:#fff; border-bottom:1px solid var(--line); padding:14px 20px; display:flex; align-items:center; gap:12px; }
+  header h1 { font-size:18px; margin:0; }
+  .wrap { max-width:920px; margin:0 auto; padding:0 20px; }
+  .hero { text-align:center; padding:64px 20px 48px; background:linear-gradient(180deg,#fff 0%,#f6f8fa 100%); }
+  .hero h2 { font-size:34px; margin:0 0 14px; }
+  .hero p { color:var(--muted); font-size:16px; max-width:660px; margin:0 auto 26px; }
+  .btn { display:inline-block; padding:11px 26px; border-radius:8px; text-decoration:none; font-weight:600; font-size:15px; margin:4px; }
+  .btn-primary { background:var(--blue); color:#fff; }
+  .btn-primary:hover { background:#0a63c9; }
+  .btn-ghost { border:1px solid var(--line); color:var(--text); background:#fff; }
+  .btn-ghost:hover { background:#f0f6ff; }
+  section { padding:44px 0; }
+  section h3 { font-size:22px; margin:0 0 8px; }
+  section .sub { color:var(--muted); margin:0 0 26px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px; }
+  .card h4 { margin:0 0 8px; font-size:16px; }
+  .card p { margin:0; color:var(--muted); font-size:13px; }
+  .badge { display:inline-block; border-radius:10px; font-size:11px; padding:1px 8px; margin-right:6px; }
+  .b-blue { background:#ddf4ff; color:var(--blue); } .b-green { background:#dafbe1; color:var(--green); }
+  .b-orange { background:#fff1d6; color:var(--orange); } .b-gray { background:#f0f0f0; color:#444; }
+  table { width:100%; border-collapse:collapse; background:var(--card); }
+  th, td { border:1px solid var(--line); padding:12px 14px; text-align:left; font-size:14px; }
+  th { background:#f6f8fa; }
+  .price { font-size:22px; font-weight:700; color:var(--blue); }
+  .hot { background:#fff8c5; }
+  .demo { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px 18px; font-family:Consolas,monospace; font-size:13px; overflow:auto; }
+  .demo .cm { color:#8b949e; }
+  .foot { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:12px; text-align:center; }
+  @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>📡 Signals API</h1>
+  <span style="color:var(--muted);font-size:13px">AI Signal Feed · 4 sources auto-aggregated daily</span>
+</header>
+
+<div class="hero">
+  <h2>See what happened in AI today, on one screen</h2>
+  <p>GitHub Trending · HuggingFace · AI YouTube channels · Silicon Valley feed —<br>
+     automatically fetched, deduplicated, tagged and archived.<br>
+     Every signal links back to the original source. Search history anytime. Machine-readable API for your own pipelines.</p>
+  <a class="btn btn-primary" href="#pricing">Try for $15/mo</a>
+  <a class="btn btn-ghost" href="#demo">See demo</a>
+</div>
+
+<div class="wrap">
+  <section>
+    <h3>4 high-quality sources</h3>
+    <p class="sub">All from public APIs and public RSS feeds, collected automatically every day</p>
+    <div class="grid">
+      <div class="card"><h4>🐙 GitHub Trending</h4><p>Daily trending repos: Top &amp; Rising — watch open-source projects gain traction.</p></div>
+      <div class="card"><h4>🤗 HuggingFace</h4><p>Popular and new models with downloads, likes and tags. Model landscape at a glance.</p></div>
+      <div class="card"><h4>▶️ AI YouTube</h4><p>Latest videos and news from curated AI channels, summary links straight to the source.</p></div>
+      <div class="card"><h4>🏙️ Silicon Valley</h4><p>Curated Silicon Valley tech news, auto-classified by company and topic.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Why it's worth opening every day</h3>
+    <p class="sub">Four things it does for you</p>
+    <div class="grid2">
+      <div class="card"><h4>🔗 Traceable</h4><p>Every signal carries the original URL and publish time — minutes instead of a day of tab-hopping.</p></div>
+      <div class="card"><h4>⏳ Time compression</h4><p>Four sources become one list, filtered by company / topic / type. See only what you care about.</p></div>
+      <div class="card"><h4>🗂️ History archive</h4><p>Auto-archived daily — answer "what happened last week" any time. Value that compounds.</p></div>
+      <div class="card"><h4>🤖 Machine readable</h4><p>Local JSON API plus JSON/CSV export. Drop it straight into your research, quant or content pipeline.</p></div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h3>Live demo</h3>
+    <p class="sub">Ready the moment you deploy locally (deployment package included with purchase)</p>
+    <div class="demo">
+<span class="cm"># Top 5 OpenAI signals today</span><br>
+$ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
+{<br>
+&nbsp;&nbsp;"count": 5,<br>
+&nbsp;&nbsp;"signals": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{ "signal_type": "model", "title": "Qwen3.8-Flash-Next",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://huggingface.co/...", "summary": "..." },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;]<br>
+}
+    </div>
+    <p style="margin-top:14px;color:var(--muted);font-size:13px">
+      <span class="badge b-blue">Dashboard</span>Visual panel in the browser, filter &amp; history included
+      <span class="badge b-green">API</span>/health /api/signals /api/archive — all endpoints
+      <span class="badge b-orange">Export</span>Full history as JSON / CSV, one click
+    </p>
+  </section>
+
+  <section id="pricing">
+    <h3>Pricing</h3>
+    <p class="sub">Try for a week first, upgrade when it works for you</p>
+    <table>
+      <tr><th></th><th>Trial / Developer</th><th class="hot">Standard</th><th>Data Pack / Annual</th></tr>
+      <tr><td><b>Price</b></td><td><span class="price">$15</span>/mo</td><td class="hot"><span class="price">$29</span>/mo</td><td>One-time <span class="price">$299</span> · Annual <span class="price">$1,499</span></td></tr>
+      <tr><td>Data scope</td><td>Live signals (4 sources)</td><td class="hot">Live + history archive</td><td>Full history + monthly updates</td></tr>
+      <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
+      <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
+      <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
+    </table>
+    <p style="margin-top:18px;text-align:center">
+      <a class="btn btn-primary" href="#contact">Contact to try</a>
+    </p>
+  </section>
+
+  <section>
+    <h3>Delivery options</h3>
+    <p class="sub">Pick what fits you</p>
+    <div class="grid3">
+      <div class="card"><h4>A. Hosted</h4><p>We run it and hand you an HTTP endpoint. Zero ops on your side.</p></div>
+      <div class="card"><h4>B. Self-hosted</h4><p>Full source + scripts. All data stays on your machine.</p></div>
+      <div class="card"><h4>C. One-time data pack</h4><p>Full history as JSON/CSV, buy once, no ongoing service.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h3>Contact</h3>
+    <p class="sub">Reply or DM — setup the same day, first signals tomorrow morning</p>
+    <div class="card" style="text-align:center;padding:26px">
+      <p style="font-size:15px;margin:0 0 14px"><b>📍 Demo dashboard:</b> <span id="demoUrl">provided with the deployment package</span></p>
+      <p style="color:var(--muted);font-size:13px;margin:0">Mention which plan you need: Trial / Standard / Data Pack, and hosted or self-hosted.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    ⚠️ Data comes from public APIs and public RSS feeds, auto-tagged by rules and not manually verified; not investment advice.
+    Reselling requires checking each source's Terms of Service yourself.<br>
+    Signals API · 2026
+  </div>
+</div>
+</body>
+</html>
