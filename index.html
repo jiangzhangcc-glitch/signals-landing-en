@@ -126,8 +126,30 @@
       <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
     </table>
     <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-primary" href="#contact">Pay</a>
+      <a class="btn btn-primary" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Pay</a>
     </p>
+    <div id="pay-panel" style="display:none;max-width:560px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
+      <h4 style="margin:0 0 6px;font-size:16px">💰 Payment methods</h4>
+      <p style="color:var(--muted);font-size:12px;margin:0 0 16px">After paying, email john@jiangzhang.ca (mention your plan and email — delivery same day)</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">WeChat Pay (CN)</div>
+          <div style="font-size:24px">🟢</div>
+          <div id="pay-wechat" style="color:var(--muted);font-size:12px;margin-top:6px">QR code pending</div>
+        </div>
+        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">Alipay (CN)</div>
+          <div style="font-size:24px">🔵</div>
+          <div id="pay-alipay" style="color:var(--muted);font-size:12px;margin-top:6px">QR code pending</div>
+        </div>
+        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">International</div>
+          <div style="font-size:24px">💳</div>
+          <div style="color:var(--muted);font-size:12px;margin-top:6px">Credit / Master / Debit / PayPal</div>
+          <a id="pay-overseas" href="#" style="color:var(--blue);font-size:13px;font-weight:600">Payment link pending</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="foot">
