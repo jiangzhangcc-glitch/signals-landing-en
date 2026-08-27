@@ -34,6 +34,9 @@
   table { width:100%; border-collapse:collapse; background:var(--card); }
   th, td { border:1px solid var(--line); padding:12px 14px; text-align:left; font-size:14px; }
   th { background:#f6f8fa; }
+  #pricing table { width:66.7%; margin:0 auto; }
+  #pricing th, #pricing td { padding:8px 9px; font-size:12px; }
+  #pricing .price { font-size:17px; }
   .price { font-size:22px; font-weight:700; color:var(--blue); }
   .hot { background:#fff8c5; }
   .demo { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px 18px; font-family:Consolas,monospace; font-size:13px; overflow:auto; }
@@ -93,22 +96,6 @@
     </p>
   </section>
 
-  <section id="pricing">
-    <h3>Subscription plans</h3>
-    <p class="sub">Try for a week first, upgrade when it works for you</p>
-    <table>
-      <tr><th></th><th>Trial / Developer</th><th class="hot">Standard</th><th>Data Pack / Annual</th></tr>
-      <tr><td><b>Price</b></td><td><span class="price">$15</span>/mo</td><td class="hot"><span class="price">$29</span>/mo</td><td>One-time <span class="price">$299</span> · Annual <span class="price">$1,499</span></td></tr>
-      <tr><td>Data scope</td><td>Live signals (4 sources)</td><td class="hot">Live + history archive</td><td>Full history + monthly updates</td></tr>
-      <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
-      <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
-      <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
-    </table>
-    <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-primary" href="#contact">Contact to try</a>
-    </p>
-  </section>
-
   <section>
     <h3>Delivery options</h3>
     <p class="sub">Pick what fits you</p>
@@ -124,6 +111,22 @@
     <p class="sub">Email me directly — setup the same day, first signals tomorrow morning</p>
     <p style="text-align:left;color:var(--text);font-size:14px;margin:6px 0 0">
       📧 <b style="color:var(--blue)">john@jiangzhang.ca</b> — in your email, mention the plan (Trial / Standard / Data Pack) and delivery option (self-hosted / hosted)
+    </p>
+  </section>
+
+  <section id="pricing">
+    <h3>Subscription plans</h3>
+    <p class="sub">Try for a week first, upgrade when it works for you</p>
+    <table>
+      <tr><th></th><th>Trial / Developer</th><th class="hot">Standard</th><th>Data Pack / Annual</th></tr>
+      <tr><td><b>Price</b></td><td><span class="price">$15</span>/mo</td><td class="hot"><span class="price">$29</span>/mo</td><td>One-time <span class="price">$299</span> · Annual <span class="price">$1,499</span></td></tr>
+      <tr><td>Data scope</td><td>Live signals (4 sources)</td><td class="hot">Live + history archive</td><td>Full history + monthly updates</td></tr>
+      <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
+      <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
+      <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
+    </table>
+    <p style="margin-top:18px;text-align:center">
+      <a class="btn btn-primary" href="#contact">Pay</a>
     </p>
   </section>
 
