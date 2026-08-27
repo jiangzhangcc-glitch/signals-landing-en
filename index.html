@@ -86,18 +86,6 @@
     <p style="text-align:center;margin:10px 0 18px">
       <a class="btn btn-primary" href="https://jiangzhangcc-glitch.github.io/signals-api-demo/" target="_blank">🎯 Open the live demo dashboard</a>
     </p>
-    <div class="demo">
-<span class="cm"># Top 5 OpenAI signals today</span><br>
-$ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
-{<br>
-&nbsp;&nbsp;"count": 5,<br>
-&nbsp;&nbsp;"signals": [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{ "signal_type": "model", "title": "Qwen3.8-Flash-Next",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://huggingface.co/...", "summary": "..." },<br>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;]<br>
-}
-    </div>
     <p style="margin-top:14px;color:var(--muted);font-size:13px">
       <span class="badge b-blue">Dashboard</span>Visual panel in the browser, filter &amp; history included
       <span class="badge b-green">API</span>/health /api/signals /api/archive — all endpoints
