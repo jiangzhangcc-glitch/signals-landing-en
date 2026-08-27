@@ -183,6 +183,8 @@ $ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
 const FORMSPREE_ENDPOINT = ""; // e.g. "https://formspree.io/f/abcdwxyz"
 const CONTACT_EMAIL = "john@jiangzhang.ca";
 
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
 function submitLead(e) {
   e.preventDefault();
   const name = document.getElementById("f-name").value.trim();
@@ -192,7 +194,8 @@ function submitLead(e) {
   const note = document.getElementById("f-note").value.trim();
   const msg = document.getElementById("f-msg");
   if (!contact) { msg.className = "form-msg err"; msg.textContent = "Please enter your contact (email or WeChat)."; return false; }
-  const body = "Name: " + (name || "not provided") +
+  const text = "Signals API inquiry\n" +
+    "Name: " + (name || "not provided") +
     "\nPlan: " + plan +
     "\nDelivery: " + form +
     "\nContact: " + contact +
@@ -204,16 +207,40 @@ function submitLead(e) {
       body: JSON.stringify({ name, plan, form, contact, note })
     }).then(r => {
       if (r.ok) { msg.className = "form-msg ok"; msg.textContent = "✅ Submitted! I'll get back to you soon."; }
-      else { msg.className = "form-msg err"; msg.textContent = "Submit failed, please email us instead."; }
+      else { msg.className = "form-msg err"; msg.textContent = "Submit failed — copy the text below and email " + CONTACT_EMAIL + ":"; showCopy(msg, text); }
     }).catch(() => {
-      msg.className = "form-msg err"; msg.textContent = "Network error, please email us instead.";
+      msg.className = "form-msg err"; msg.textContent = "Network error — copy the text below and email " + CONTACT_EMAIL + ":"; showCopy(msg, text);
     });
   } else {
-    const subject = encodeURIComponent("Signals API inquiry" + (name ? " - " + name : ""));
-    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + encodeURIComponent(body);
-    msg.className = "form-msg ok"; msg.textContent = "📧 Mail client opened with the message pre-filled — just hit send.";
+    msg.className = "form-msg ok";
+    msg.innerHTML = "✅ Inquiry ready! Copy the text below and email <b>" + esc(CONTACT_EMAIL) + "</b> (or send it via WeChat):";
+    showCopy(msg, text);
   }
   return false;
+}
+
+function showCopy(msg, text) {
+  const area = document.createElement("textarea");
+  area.value = text;
+  area.readOnly = true;
+  area.style.cssText = "width:100%;min-height:110px;margin-top:10px;font-size:13px;font-family:inherit;padding:8px;border:1px solid var(--line);border-radius:6px;";
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.textContent = "📋 Copy";
+  btn.style.cssText = "margin-top:8px;padding:8px 18px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;";
+  btn.onclick = () => {
+    area.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => { ok = true; }).catch(() => {});
+    }
+    btn.textContent = ok ? "✅ Copied" : "Copy failed — select manually";
+    setTimeout(() => { btn.textContent = "📋 Copy"; }, 2000);
+  };
+  msg.appendChild(area);
+  msg.appendChild(document.createElement("br"));
+  msg.appendChild(btn);
 }
 </script>
 </body>
