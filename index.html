@@ -38,6 +38,12 @@
   .hot { background:#fff8c5; }
   .demo { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px 18px; font-family:Consolas,monospace; font-size:13px; overflow:auto; }
   .demo .cm { color:#8b949e; }
+  form.lead { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:22px 24px; max-width:560px; margin:18px auto; text-align:left; }
+  form.lead label { display:block; font-size:13px; color:var(--muted); margin:12px 0 4px; }
+  form.lead input, form.lead select, form.lead textarea { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font-size:14px; font-family:inherit; }
+  form.lead textarea { min-height:64px; resize:vertical; }
+  .form-msg { font-size:13px; margin-top:10px; min-height:18px; }
+  .form-msg.ok { color:var(--green); } .form-msg.err { color:#cf222e; }
   .foot { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:12px; text-align:center; }
   @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } }
 </style>
@@ -133,11 +139,35 @@ $ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
 
   <section id="contact">
     <h3>Contact</h3>
-    <p class="sub">Reply or DM — setup the same day, first signals tomorrow morning</p>
-    <div class="card" style="text-align:center;padding:26px">
-      <p style="font-size:15px;margin:0 0 14px"><b>📍 Demo dashboard:</b> <span id="demoUrl">provided with the deployment package</span></p>
-      <p style="color:var(--muted);font-size:13px;margin:0">Mention which plan you need: Trial / Standard / Data Pack, and hosted or self-hosted.</p>
-    </div>
+    <p class="sub">Setup the same day, first signals tomorrow morning</p>
+    <p style="text-align:center;margin:10px 0">
+      <a class="btn btn-primary" href="mailto:john@jiangzhang.ca?subject=Signals%20API%20Inquiry">📧 Email us</a>
+      <a class="btn btn-ghost" href="#lead-form">📝 Quick inquiry form</a>
+    </p>
+    <form class="lead" id="lead-form" onsubmit="return submitLead(event)">
+      <label>Name (optional)</label>
+      <input type="text" id="f-name" placeholder="How should we call you?">
+      <label>Plan you need</label>
+      <select id="f-plan">
+        <option value="Trial $15/mo">Trial $15/mo</option>
+        <option value="Standard $29/mo">Standard $29/mo</option>
+        <option value="Data Pack $299 (one-time)">Data Pack $299 (one-time)</option>
+        <option value="Annual $1,499">Annual $1,499</option>
+        <option value="Not sure yet, exploring">Not sure yet, exploring</option>
+      </select>
+      <label>Delivery option</label>
+      <select id="f-form">
+        <option value="Self-hosted (data stays on your machine)">Self-hosted (data stays on your machine)</option>
+        <option value="Hosted (you get an API endpoint)">Hosted (you get an API endpoint)</option>
+        <option value="One-time data pack">One-time data pack</option>
+      </select>
+      <label>Your contact (WeChat / email)</label>
+      <input type="text" id="f-contact" placeholder="email or WeChat" required>
+      <label>Notes (optional)</label>
+      <textarea id="f-note" placeholder="Companies or topics you care about?"></textarea>
+      <button type="submit" style="margin-top:16px;width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer">Submit inquiry</button>
+      <div class="form-msg" id="f-msg"></div>
+    </form>
   </section>
 
   <div class="foot">
@@ -146,5 +176,45 @@ $ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
     Signals API · 2026
   </div>
 </div>
+<script>
+// Form submission config
+// Mode 1 (default): zero-config, opens mail client with the message pre-filled.
+// Mode 2: fill in your Formspree endpoint below to auto-receive submissions.
+const FORMSPREE_ENDPOINT = ""; // e.g. "https://formspree.io/f/abcdwxyz"
+const CONTACT_EMAIL = "john@jiangzhang.ca";
+
+function submitLead(e) {
+  e.preventDefault();
+  const name = document.getElementById("f-name").value.trim();
+  const plan = document.getElementById("f-plan").value;
+  const form = document.getElementById("f-form").value;
+  const contact = document.getElementById("f-contact").value.trim();
+  const note = document.getElementById("f-note").value.trim();
+  const msg = document.getElementById("f-msg");
+  if (!contact) { msg.className = "form-msg err"; msg.textContent = "Please enter your contact (email or WeChat)."; return false; }
+  const body = "Name: " + (name || "not provided") +
+    "\nPlan: " + plan +
+    "\nDelivery: " + form +
+    "\nContact: " + contact +
+    (note ? "\nNotes: " + note : "");
+  if (FORMSPREE_ENDPOINT) {
+    fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ name, plan, form, contact, note })
+    }).then(r => {
+      if (r.ok) { msg.className = "form-msg ok"; msg.textContent = "✅ Submitted! I'll get back to you soon."; }
+      else { msg.className = "form-msg err"; msg.textContent = "Submit failed, please email us instead."; }
+    }).catch(() => {
+      msg.className = "form-msg err"; msg.textContent = "Network error, please email us instead.";
+    });
+  } else {
+    const subject = encodeURIComponent("Signals API inquiry" + (name ? " - " + name : ""));
+    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + encodeURIComponent(body);
+    msg.className = "form-msg ok"; msg.textContent = "📧 Mail client opened with the message pre-filled — just hit send.";
+  }
+  return false;
+}
+</script>
 </body>
 </html>
