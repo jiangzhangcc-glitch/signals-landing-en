@@ -141,8 +141,11 @@ $ curl "http://127.0.0.1:8787/api/signals?company=OpenAI&limit=5"<br>
     <h3>Contact</h3>
     <p class="sub">Setup the same day, first signals tomorrow morning</p>
     <p style="text-align:center;margin:10px 0">
-      <a class="btn btn-primary" href="mailto:john@jiangzhang.ca?subject=Signals%20API%20Inquiry">📧 Email us</a>
+      <button type="button" class="btn btn-primary" onclick="copyEmail(this)">📋 Copy email (john@jiangzhang.ca)</button>
       <a class="btn btn-ghost" href="#lead-form">📝 Quick inquiry form</a>
+    </p>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin:0 0 6px">
+      Email: <b style="color:var(--blue)">john@jiangzhang.ca</b> (click the button above to copy)
     </p>
     <form class="lead" id="lead-form" onsubmit="return submitLead(event)">
       <label>Name (optional)</label>
@@ -184,6 +187,23 @@ const FORMSPREE_ENDPOINT = ""; // e.g. "https://formspree.io/f/abcdwxyz"
 const CONTACT_EMAIL = "john@jiangzhang.ca";
 
 function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function copyEmail(btn) {
+  const email = CONTACT_EMAIL;
+  let ok = false;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(email).then(() => { ok = true; }).catch(() => {});
+  }
+  if (!ok) {
+    const ta = document.createElement("textarea");
+    ta.value = email; document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  const old = btn.textContent;
+  btn.textContent = ok ? "✅ Email copied!" : "Copy failed — select the email manually";
+  setTimeout(() => { btn.textContent = old; }, 2500);
+}
 
 function submitLead(e) {
   e.preventDefault();
