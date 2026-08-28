@@ -42,6 +42,9 @@
   .demo { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px 18px; font-family:Consolas,monospace; font-size:13px; overflow:auto; }
   .demo .cm { color:#8b949e; }
   .foot { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:12px; text-align:center; }
+  .lang-switch { margin-left:auto; display:flex; gap:6px; align-items:center; }
+  .lang-switch a { text-decoration:none; font-size:13px; font-weight:600; padding:4px 10px; border-radius:6px; border:1px solid var(--line); color:var(--muted); background:#fff; }
+  .lang-switch a.active { background:var(--blue); color:#fff; border-color:var(--blue); }
   @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } }
 </style>
 </head>
@@ -49,6 +52,10 @@
 <header>
   <h1>📡 Signals API</h1>
   <span style="color:var(--muted);font-size:13px">AI Signal Feed · 4 sources auto-aggregated daily</span>
+  <div class="lang-switch">
+    <a href="https://signals.jiangzhang.ca/">中文</a>
+    <a href="https://jiangzhangcc-glitch.github.io/signals-landing-en/" class="active">EN</a>
+  </div>
 </header>
 
 <div class="hero">
