@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Signals API · AI Signal Feed | 4 sources, one screen</title>
+<title>Signals API · AI Signal Feed | Today's AI in one screen</title>
 <style>
   :root { --bg:#f6f8fa; --card:#fff; --line:#d0d7de; --text:#1f2328; --muted:#57606a; --blue:#0969da; --green:#1a7f37; --orange:#9a6700; }
   * { box-sizing:border-box; }
@@ -13,7 +13,7 @@
   .wrap { max-width:920px; margin:0 auto; padding:0 20px; }
   .hero { text-align:center; padding:64px 20px 48px; background:linear-gradient(180deg,#fff 0%,#f6f8fa 100%); }
   .hero h2 { font-size:34px; margin:0 0 14px; }
-  .hero p { color:var(--muted); font-size:16px; max-width:660px; margin:0 auto 26px; }
+  .hero p { color:var(--muted); font-size:16px; max-width:680px; margin:0 auto 26px; }
   .btn { display:inline-block; padding:11px 26px; border-radius:8px; text-decoration:none; font-weight:600; font-size:15px; margin:4px; }
   .btn-primary { background:var(--blue); color:#fff; }
   .btn-primary:hover { background:#0a63c9; }
@@ -28,24 +28,33 @@
   .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px; }
   .card h4 { margin:0 0 8px; font-size:16px; }
   .card p { margin:0; color:var(--muted); font-size:13px; }
+  .feature { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:22px 24px; margin:14px 0; }
+  .feature h4 { margin:0 0 10px; font-size:17px; }
+  .feature p { margin:0; color:var(--text); font-size:14px; }
   .badge { display:inline-block; border-radius:10px; font-size:11px; padding:1px 8px; margin-right:6px; }
   .b-blue { background:#ddf4ff; color:var(--blue); } .b-green { background:#dafbe1; color:var(--green); }
   .b-orange { background:#fff1d6; color:var(--orange); } .b-gray { background:#f0f0f0; color:#444; }
   table { width:100%; border-collapse:collapse; background:var(--card); }
   th, td { border:1px solid var(--line); padding:12px 14px; text-align:left; font-size:14px; }
   th { background:#f6f8fa; }
-  #pricing table { width:66.7%; margin:0 auto; }
-  #pricing th, #pricing td { padding:8px 9px; font-size:12px; }
-  #pricing .price { font-size:17px; }
-  .price { font-size:22px; font-weight:700; color:var(--blue); }
+  #pricing table { width:80%; margin:0 auto; }
+  #pricing th, #pricing td { padding:10px 12px; font-size:13px; text-align:center; }
+  #pricing .price { font-size:18px; font-weight:700; color:var(--blue); }
   .hot { background:#fff8c5; }
-  .demo { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px 18px; font-family:Consolas,monospace; font-size:13px; overflow:auto; }
-  .demo .cm { color:#8b949e; }
   .foot { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:12px; text-align:center; }
   .lang-switch { margin-left:auto; display:flex; gap:6px; align-items:center; }
   .lang-switch a { text-decoration:none; font-size:13px; font-weight:600; padding:4px 10px; border-radius:6px; border:1px solid var(--line); color:var(--muted); background:#fff; }
   .lang-switch a.active { background:var(--blue); color:#fff; border-color:var(--blue); }
-  @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } }
+  details.delivery { background:var(--card); border:1px solid var(--line); border-radius:8px; margin:10px 0; }
+  details.delivery summary { cursor:pointer; padding:16px 20px; font-weight:600; font-size:15px; list-style:none; }
+  details.delivery summary::before { content:"▸ "; color:var(--blue); }
+  details.delivery[open] summary::before { content:"▾ "; }
+  details.delivery .d-body { padding:0 20px 18px; color:var(--muted); font-size:14px; }
+  .pay-tier { border:1px solid var(--line); border-radius:8px; padding:14px; text-align:center; margin:8px 0; }
+  .pay-tier .tier-name { font-size:14px; font-weight:700; }
+  .pay-tier .tier-price { font-size:18px; font-weight:700; color:var(--blue); margin:4px 0; }
+  .pay-tier a { display:inline-block; margin-top:6px; text-decoration:none; font-weight:600; font-size:13px; color:#fff; background:var(--blue); padding:6px 16px; border-radius:6px; }
+  @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } }
 </style>
 </head>
 <body>
@@ -59,34 +68,46 @@
 </header>
 
 <div class="hero">
-  <h2>See what happened in AI today, on one screen</h2>
-  <p>GitHub Trending · HuggingFace · AI YouTube channels · Silicon Valley feed —<br>
-     automatically fetched, deduplicated, tagged and archived.<br>
-     Every signal links back to the original source. Search history anytime. Machine-readable API for your own pipelines.</p>
+  <h2>Today's AI landscape in one screen</h2>
+  <p>GitHub · HuggingFace · YouTube · SiliconValley — automatically fetched, deduplicated, tagged, archived, delivered.<br>
+     Every signal links back to the original source: traceable, archivable, searchable, machine-readable, API-ready.</p>
   <a class="btn btn-primary" href="#demo">🎯 Try it live</a>
-  <a class="btn btn-ghost" href="#pricing">See plans</a>
 </div>
 
 <div class="wrap">
   <section>
-    <h3>4 high-quality sources</h3>
-    <p class="sub">All from public APIs and public RSS feeds, collected automatically every day</p>
+    <h3>High-quality sources</h3>
+    <p class="sub">All four sources come from public APIs and public RSS feeds, collected and pushed four times daily.</p>
     <div class="grid">
-      <div class="card"><h4>🐙 GitHub Trending</h4><p>Daily trending repos: Top &amp; Rising — watch open-source projects gain traction.</p></div>
-      <div class="card"><h4>🤗 HuggingFace</h4><p>Popular and new models with downloads, likes and tags. Model landscape at a glance.</p></div>
-      <div class="card"><h4>▶️ AI YouTube</h4><p>Latest videos and news from curated AI channels, summary links straight to the source.</p></div>
-      <div class="card"><h4>🏙️ Silicon Valley</h4><p>Curated Silicon Valley tech news, auto-classified by company and topic.</p></div>
+      <div class="card"><h4>🐙 GitHub Trending</h4><p>The global pulse of open source. We track trending and rising repositories every day — AI frameworks, agent projects, developer tools. When a repo explodes in stars, it's usually the first sign of a new technology taking off.</p></div>
+      <div class="card"><h4>🤗 HuggingFace</h4><p>The release center of the model world. Popular and new models with downloads, likes and task tags. Who released what, which model the community is adopting — model iteration at a glance, the most direct read on technical direction.</p></div>
+      <div class="card"><h4>▶️ YouTube AI channels</h4><p>Deep content in video form. Latest videos from high-quality AI channels — technical breakdowns, paper walkthroughs, industry conversations — summaries linking straight to the original video.</p></div>
+      <div class="card"><h4>🏙️ Silicon Valley</h4><p>First-hand North American tech. Product launches, company moves, funding and industry talk from the Valley, auto-classified by company and topic. No secondhand retelling.</p></div>
     </div>
   </section>
 
   <section>
-    <h3>Why it's worth opening every day</h3>
-    <p class="sub">Four things it does for you</p>
-    <div class="grid2">
-      <div class="card"><h4>🔗 Traceable</h4><p>Every signal carries the original URL and publish time — minutes instead of a day of tab-hopping.</p></div>
-      <div class="card"><h4>⏳ Time compression</h4><p>Four sources become one list, filtered by company / topic / type. See only what you care about.</p></div>
-      <div class="card"><h4>🗂️ History archive</h4><p>Auto-archived daily — answer "what happened last week" any time. Value that compounds.</p></div>
-      <div class="card"><h4>🤖 Machine readable</h4><p>Local JSON API plus JSON/CSV export. Drop it straight into your research, quant or content pipeline.</p></div>
+    <h3>Four highlights</h3>
+    <p class="sub">What happened in AI in the last 24h? Where does the timeline live? Are the signals real? Is the data an asset? Human-readable and machine-readable?</p>
+
+    <div class="feature">
+      <h4>🔗 Traceability · Are the signals real?</h4>
+      <p>The AI world produces enormous information daily, but most of it gets distorted through secondhand retelling and clickbait. Signals API's first principle: every signal leads back to its source. We pull from GitHub repository pages, HuggingFace model cards, original YouTube videos and Silicon Valley feeds — each signal carries its original URL, publish time and publisher. Click once and you're at the source, with no middleman interpretation. Why does this matter? In a field with extreme information distortion, "who said it" and "where it came from" are the anchor of value. Use publish time to judge freshness, publisher to judge credibility, and the original link for deeper research. For researchers, traceability means every citation is verifiable. For investors, it means decisions withstand scrutiny. For creators, it means you can cite with confidence. We don't produce opinions — we deliver verifiable facts, with "back to the source" as the default behavior of the product.</p>
+    </div>
+
+    <div class="feature">
+      <h4>⏳ Time compression · What happened in 24 hours?</h4>
+      <p>Say you want to know what happened in AI today: hundreds of new repos on GitHub, dozens of new models on HuggingFace, hundreds of AI videos on YouTube, and a flood of Valley news. Manually scanning that takes half a day. Signals API compresses it into one list: four fixed collections a day, automatic deduplication and classification, condensing four streams into a few dozen key signals. Further compression comes from filtering — by company (OpenAI, DeepSeek, Qwen…), by topic (model, agent, security, funding…), by type. Time compression isn't about seeing less; it's about seeing less of what doesn't matter — turning an eight-hour information hunt into a five-minute read. For professionals whose time is money, this compression is the product. No more maintaining dozens of bookmarks and RSS feeds — one signal dashboard is the single entry point.</p>
+    </div>
+
+    <div class="feature">
+      <h4>🗂️ History archive · Where does the timeline live?</h4>
+      <p>Most information products only give you "now". Signals API also gives you "then". Every day's signals are automatically archived: yesterday, last week, last month — searchable any time. Why does history matter? First, trend review — a model topped HuggingFace last week; is the momentum continuing this week? Historical data shows trajectories, not isolated snapshots. Second, recovering what you missed — back from a week away, the archive fills in everything important you missed, so you never fall behind because you "didn't see it". Third, accumulating an asset — after three months, a year of continuous operation, this archive is a unique data asset documenting the full evolution of the AI industry over that period. For research and investing, history isn't nostalgia; it's the baseline of analysis. Without history, you can't tell whether "now" is normal fluctuation or an anomaly. The archive compounds daily — every day you delay subscribing is a day of data thickness you never get back.</p>
+    </div>
+
+    <div class="feature">
+      <h4>🤖 Machine-readable · Is the data an asset?</h4>
+      <p>Information products come in two kinds: for humans and for machines. Signals API does both — a visual dashboard for humans, plus a JSON API and CSV/JSON export for machines. Why is machine readability a necessity? Because in real workflows, "humans" shouldn't be the only consumer: quant teams feed signals into models, researchers import data into analysis tools, content teams batch-fetch topics, founders monitor competitors — all of these need structured data, not screenshots. Our API provides query endpoints filtered by company, topic, source, type and time, returning standard JSON with stable fields and uniform formatting, ready to plug into your code. History supports batch retrieval by date, and one-click export for offline analysis. For humans, a dashboard; for machines, an API; for workflows, exports. Human-readable and machine-readable — that's what makes it a true data asset.</p>
     </div>
   </section>
 
@@ -105,29 +126,31 @@
 
   <section>
     <h3>Delivery options</h3>
-    <p class="sub">Pick what fits you</p>
-    <div class="grid3">
-      <div class="card"><h4>A. Hosted</h4><p>We run it and hand you an HTTP endpoint. Zero ops on your side.</p></div>
-      <div class="card"><h4>B. Self-hosted</h4><p>Full source + scripts. All data stays on your machine.</p></div>
-      <div class="card"><h4>C. One-time data pack</h4><p>Full history as JSON/CSV, buy once, no ongoing service.</p></div>
-    </div>
+    <details class="delivery" open>
+      <summary>A. Hosted</summary>
+      <div class="d-body">We run and maintain everything and hand you an HTTP endpoint. You just get the URL and access credentials — collection, updates and availability are on us. Best for buyers who want data without touching code.</div>
+    </details>
+    <details class="delivery">
+      <summary>B. Self-hosted</summary>
+      <div class="d-body">Full source code + scripts, data stays entirely on your machine. We deliver the complete codebase with one-click startup scripts (collection, API server, dashboard) for you to deploy on your own server — data never leaves your network. Best for teams with IT capacity and data-sovereignty requirements.</div>
+    </details>
+    <details class="delivery">
+      <summary>C. One-time data pack</summary>
+      <div class="d-body">Full history as JSON/CSV, buy once, no ongoing service. Best for buyers who only need historical data for offline analysis. The data is yours forever after delivery.</div>
+    </details>
   </section>
 
   <section id="contact">
     <h3>Contact</h3>
-    <p class="sub">Email me directly — setup the same day, first signals tomorrow morning</p>
-    <p style="text-align:left;color:var(--text);font-size:14px;margin:6px 0 0">
-      📧 <b style="color:var(--blue)">john@jiangzhang.ca</b> — in your email, mention the plan (Trial / Standard / Data Pack) and delivery option (self-hosted / hosted)
-    </p>
+    <p class="sub">Email customer service: 📧 <b style="color:var(--blue)">john@jiangzhang.ca</b> — first signal push the next morning.</p>
   </section>
 
   <section id="pricing">
     <h3>Subscription plans</h3>
-    <p class="sub">Try for a week first, upgrade when it works for you</p>
     <table>
-      <tr><th></th><th>Trial / Developer</th><th class="hot">Standard</th><th>Data Pack / Annual</th></tr>
-      <tr><td><b>Price</b></td><td><span class="price">$15</span>/mo</td><td class="hot"><span class="price">$29</span>/mo</td><td>One-time <span class="price">$299</span> · Annual <span class="price">$1,499</span></td></tr>
-      <tr><td>Data scope</td><td>Live signals (4 sources)</td><td class="hot">Live + history archive</td><td>Full history + monthly updates</td></tr>
+      <tr><th></th><th>Basic</th><th class="hot">Standard</th><th>Annual</th></tr>
+      <tr><td><b>Price</b></td><td><span class="price">CA$15</span>/mo</td><td class="hot"><span class="price">CA$40</span>/mo</td><td><span class="price">CA$300</span>/mo</td></tr>
+      <tr><td>Data scope</td><td>Daily push</td><td class="hot">Daily push + monthly analysis</td><td>Daily push + monthly archive &amp; analysis + full-year history</td></tr>
       <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
       <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
       <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
@@ -135,32 +158,44 @@
     <p style="margin-top:18px;text-align:center">
       <a class="btn btn-primary" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Pay</a>
     </p>
-    <div id="pay-panel" style="display:none;max-width:560px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
-      <h4 style="margin:0 0 6px;font-size:16px">💰 Payment methods</h4>
-      <p style="color:var(--muted);font-size:12px;margin:0 0 16px">After paying, email john@jiangzhang.ca (mention your plan and email — delivery same day)</p>
+    <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
+      <h4 style="margin:0 0 6px;font-size:16px">💰 Choose a plan</h4>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px">
+          <div style="font-size:13px;font-weight:700">Basic</div>
+          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$15/mo</div>
+          <a href="https://buy.stripe.com/6oU3cv4W0366aKkfgLgw000?locale=en" target="_blank">Pay now →</a>
+        </div>
+        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff8c5">
+          <div style="font-size:13px;font-weight:700">Standard</div>
+          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$40/mo</div>
+          <a href="#" id="pay-standard">Pending (contact us)</a>
+        </div>
+        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px">
+          <div style="font-size:13px;font-weight:700">Annual</div>
+          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$300/mo</div>
+          <a href="#" id="pay-annual">Pending (contact us)</a>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
         <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px">WeChat Pay (CN)</div>
-          <div style="font-size:24px">🟢</div>
-          <div id="pay-wechat" style="color:var(--muted);font-size:12px;margin-top:6px">QR code pending</div>
-        </div>
-        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
-          <div style="font-size:13px;font-weight:600;margin-bottom:8px">Alipay (CN)</div>
-          <div style="font-size:24px">🔵</div>
-          <div id="pay-alipay" style="color:var(--muted);font-size:12px;margin-top:6px">QR code pending</div>
+          <img src="pay_wechat.png" alt="WeChat QR" style="width:150px;height:auto;border-radius:6px">
+          <div style="color:var(--muted);font-size:12px;margin-top:6px">Scan to pay</div>
         </div>
         <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px">International</div>
           <div style="font-size:24px">💳</div>
-          <div style="color:var(--muted);font-size:12px;margin-top:6px">Credit / Master / Debit / PayPal</div>
+          <div style="color:var(--muted);font-size:12px;margin-top:6px">Credit | Master | Debit | PayPal</div>
           <a id="pay-overseas" href="https://buy.stripe.com/6oU3cv4W0366aKkfgLgw000?locale=en" target="_blank" style="color:var(--blue);font-size:13px;font-weight:600">Pay now →</a>
         </div>
       </div>
+      <p style="color:var(--muted);font-size:12px;margin:14px 0 0">Activation is automatic after payment.</p>
     </div>
   </section>
 
   <div class="foot">
-    ⚠️ Data comes from public APIs and public RSS feeds, auto-tagged by rules and not manually verified; not investment advice.
+    Data comes from public APIs and public RSS feeds, auto-tagged by rules and not manually verified; not investment advice.
     Reselling requires checking each source's Terms of Service yourself.<br>
     Signals API · 2026
   </div>
