@@ -51,7 +51,7 @@
   details.delivery summary::before { content:"▸ "; color:var(--blue); }
   details.delivery[open] summary::before { content:"▾ "; }
   details.delivery .d-body { padding:0 20px 18px; color:var(--muted); font-size:14px; }
-  .delivery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:start; }
+  .delivery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; align-items:start; }
   .pay-tier { border:1px solid var(--line); border-radius:8px; padding:14px; text-align:center; margin:8px 0; }
   .pay-tier .tier-name { font-size:14px; font-weight:700; }
   .pay-tier .tier-price { font-size:18px; font-weight:700; color:var(--blue); margin:4px 0; }
@@ -140,6 +140,10 @@
     <details class="delivery" open>
       <summary>C. One-time data pack</summary>
       <div class="d-body">Full history as JSON/CSV, buy once, no ongoing service. Best for buyers who only need historical data for offline analysis. The data is yours forever after delivery.</div>
+    </details>
+    <details class="delivery" open>
+      <summary>D. API &amp; docs</summary>
+      <div class="d-body">Standard JSON endpoints with stable fields, ready to call programmatically: /api/signals (filter by company / topic / source / type / time), /api/signals/stats, /api/archive (history by date), /api/archive/days; JSON/CSV full export supported. Full API documentation (API_DOC.md) and curl/Python examples included on delivery — plug straight into your quant, research or content pipeline.</div>
     </details>
     </div>
   </section>
