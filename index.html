@@ -56,7 +56,12 @@
   .pay-tier .tier-name { font-size:14px; font-weight:700; }
   .pay-tier .tier-price { font-size:18px; font-weight:700; color:var(--blue); margin:4px 0; }
   .pay-tier a { display:inline-block; margin-top:6px; text-decoration:none; font-weight:600; font-size:13px; color:#fff; background:var(--blue); padding:6px 16px; border-radius:6px; }
-  @media (max-width:760px) { .grid,.grid2,.grid3,.features-grid,.delivery-grid { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } .wrap { max-width:92%; } }
+  .api-row { display:flex; gap:16px; align-items:flex-start; justify-content:center; }
+  .api-panel { flex:1 1 auto; max-width:520px; background:#0d1117; color:#c9d1d9; border-radius:8px; overflow:hidden; }
+  .api-head { display:flex; justify-content:space-between; align-items:center; padding:8px 14px; background:#161b22; color:#8b949e; font-size:12px; border-bottom:1px solid #30363d; }
+  .api-body { padding:14px 16px; font-family:Consolas,monospace; font-size:12px; line-height:1.7; white-space:pre; overflow:auto; max-height:220px; }
+  .api-body .cm { color:#8b949e; }
+  @media (max-width:760px) { .grid,.grid2,.grid3,.features-grid,.delivery-grid { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } .wrap { max-width:92%; } .api-row { flex-direction:column; align-items:center; } .api-panel { max-width:100%; width:100%; } }
 </style>
 </head>
 <body>
@@ -116,39 +121,38 @@
   <section id="demo">
     <h3>Live demo</h3>
     <p class="sub">👇 Try it online (real collected data, nothing to install) | self-hosted adds history archive &amp; full API</p>
-    <p style="text-align:center;margin:10px 0 18px">
-      <a class="btn btn-primary" href="https://jiangzhangcc-glitch.github.io/signals-api-demo/" target="_blank">🎯 Open the live demo dashboard</a>
-      <a class="btn btn-ghost" href="javascript:void(0)" onclick="togglePanel('api-panel', this)">🔧 Developer API</a>
-    </p>
+    <div class="api-row">
+      <div style="text-align:center;margin:10px 0 18px;flex:0 0 auto">
+        <a class="btn btn-primary" href="https://jiangzhangcc-glitch.github.io/signals-api-demo/" target="_blank">🎯 Open the live demo dashboard</a>
+        <br>
+        <a class="btn btn-ghost" href="javascript:void(0)" onclick="toggleApi(this)">🔧 Developer API</a>
+      </div>
+      <div id="api-panel" class="api-panel" style="display:none">
+        <div class="api-head">
+          <span>Developer API · standard JSON endpoints</span>
+          <button type="button" onclick="copyApi()" style="padding:4px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;font-size:12px">📋 Copy</button>
+        </div>
+        <div class="api-body" id="api-body"><span class="cm"># Top 5 OpenAI signals today</span>
+$ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"
+{
+  "count": 5,
+  "signals": [
+    { "signal_type": "model", "title": "Qwen3.8-Flash-Next",
+      "url": "https://huggingface.co/...", "summary": "..." },
+    ...
+  ]
+}
+---
+GET /api/signals · /api/signals/stats · /api/signals/{id}
+History: /api/archive?date= · /api/archive/days
+Params: company / topic / source / signal_type / since / limit
+Export: Full history as JSON / CSV, one click
+        </div>
+      </div>
+    </div>
     <p style="margin-top:14px;color:var(--muted);font-size:13px">
       <span class="badge b-blue">Dashboard</span>Visual panel in the browser, filter &amp; history included
       <span class="badge b-green">API</span>/health /api/signals /api/archive — all endpoints
-      <span class="badge b-orange">Export</span>Full history as JSON / CSV, one click
-    </p>
-  </section>
-
-  <section id="api-panel" style="display:none">
-    <h3>Developer API · plug into your workflow</h3>
-    <p class="sub">Standard JSON endpoints with stable fields — that's what "API" in our name means.</p>
-    <div class="demo" style="font-size:12px">
-<span class="cm"># Top 5 OpenAI signals today</span><br>
-$ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
-{<br>
-&nbsp;&nbsp;"count": 5,<br>
-&nbsp;&nbsp;"signals": [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{ "signal_type": "model", "title": "Qwen3.8-Flash-Next",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://huggingface.co/...", "summary": "..." },<br>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;]<br>
-}
-    </div>
-    <p style="margin-top:14px;color:var(--muted);font-size:13px">
-      <span class="badge b-gray">GET</span>/api/signals&nbsp; · &nbsp;/api/signals/stats&nbsp; · &nbsp;/api/signals/{id}
-      <br>
-      <span class="badge b-gray">History</span>/api/archive?date=&nbsp; · &nbsp;/api/archive/days
-      <br>
-      <span class="badge b-gray">Params</span>company / topic / source / signal_type / since / limit
-      <br>
       <span class="badge b-orange">Export</span>Full history as JSON / CSV, one click
     </p>
   </section>
@@ -192,19 +196,11 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       </tr>
     </table>
     <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-ghost" href="javascript:void(0)" onclick="togglePanel('pay-panel', this)">Other payment methods (WeChat)</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="togglePanel('pay-panel', this)">WeChat payment</a>
     </p>
-    <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
-      <h4 style="margin:0 0 6px;font-size:16px">💰 Other payment methods</h4>
-      <p style="color:var(--muted);font-size:12px;margin:0 0 14px">For subscriptions use "Pay now" in the table above; below is the WeChat payment channel.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
-          <div style="font-size:13px;font-weight:600;margin-bottom:8px">WeChat Pay (CN)</div>
-          <img src="pay_wechat.png" alt="WeChat QR" style="width:150px;height:auto;border-radius:6px">
-          <div style="color:var(--muted);font-size:12px;margin-top:6px">Scan to pay</div>
-        </div>
-      </div>
-      <p style="color:var(--muted);font-size:12px;margin:14px 0 0">Activation is automatic after payment.</p>
+    <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;text-align:center">
+      <img src="pay_wechat.png" alt="WeChat QR" style="width:200px;height:auto;border-radius:6px">
+      <p style="color:var(--text);font-size:14px;margin:14px 0 0">Scan to pay with WeChat — activated automatically after payment</p>
     </div>
   </section>
 
@@ -220,6 +216,29 @@ function togglePanel(id, btn) {
   var hidden = p.style.display === 'none' || !p.style.display;
   p.style.display = hidden ? 'block' : 'none';
   if (btn) btn.textContent = hidden ? btn.textContent.replace('(WeChat)', '(collapse)') : btn.textContent.replace('(collapse)', '(WeChat)');
+}
+function toggleApi(btn) {
+  var p = document.getElementById('api-panel');
+  var hidden = p.style.display === 'none' || !p.style.display;
+  p.style.display = hidden ? 'block' : 'none';
+  if (btn) btn.textContent = hidden ? '🔧 Developer API (collapse)' : '🔧 Developer API';
+}
+function copyApi() {
+  var body = document.getElementById('api-body');
+  var text = body.innerText;
+  var btn = document.querySelector('.api-head button');
+  var ok = false;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function(){ ok = true; }).catch(function(){});
+  }
+  if (!ok) {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  btn.textContent = ok ? '✅ Copied' : 'Copy failed';
+  setTimeout(function(){ btn.textContent = '📋 Copy'; }, 2000);
 }
 </script>
 </body>
