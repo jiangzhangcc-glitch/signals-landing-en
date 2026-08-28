@@ -124,6 +124,32 @@
     </p>
   </section>
 
+  <section id="api">
+    <h3>Developer API · plug into your workflow</h3>
+    <p class="sub">Standard JSON endpoints with stable fields — that's what "API" in our name means.</p>
+    <div class="demo" style="font-size:12px">
+<span class="cm"># Top 5 OpenAI signals today</span><br>
+$ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
+{<br>
+&nbsp;&nbsp;"count": 5,<br>
+&nbsp;&nbsp;"signals": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{ "signal_type": "model", "title": "Qwen3.8-Flash-Next",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://huggingface.co/...", "summary": "..." },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;]<br>
+}
+    </div>
+    <p style="margin-top:14px;color:var(--muted);font-size:13px">
+      <span class="badge b-gray">GET</span>/api/signals&nbsp; · &nbsp;/api/signals/stats&nbsp; · &nbsp;/api/signals/{id}
+      <br>
+      <span class="badge b-gray">History</span>/api/archive?date=&nbsp; · &nbsp;/api/archive/days
+      <br>
+      <span class="badge b-gray">Params</span>company / topic / source / signal_type / since / limit
+      <br>
+      <span class="badge b-orange">Export</span>Full history as JSON / CSV, one click
+    </p>
+  </section>
+
   <section>
     <h3>Delivery options</h3>
     <details class="delivery" open>
@@ -149,8 +175,8 @@
     <h3>Subscription plans</h3>
     <table>
       <tr><th></th><th>Basic</th><th class="hot">Standard</th><th>Annual</th></tr>
-      <tr><td><b>Price</b></td><td><span class="price">CA$15</span>/mo</td><td class="hot"><span class="price">CA$40</span>/mo</td><td><span class="price">CA$300</span>/mo</td></tr>
-      <tr><td>Data scope</td><td>Daily push</td><td class="hot">Daily push + monthly analysis</td><td>Daily push + monthly archive &amp; analysis + full-year history</td></tr>
+      <tr><td><b>Price</b></td><td><span class="price">CA$15</span>/mo</td><td class="hot"><span class="price">CA$40</span>/mo</td><td><span class="price">CA$300</span>/yr</td></tr>
+      <tr><td>Data scope</td><td>Daily push</td><td class="hot">Daily push + history archive</td><td>Daily push + history archive + full-year export</td></tr>
       <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
       <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
       <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
@@ -173,7 +199,7 @@
         </div>
         <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px">
           <div style="font-size:13px;font-weight:700">Annual</div>
-          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$300/mo</div>
+          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$300/yr</div>
           <a href="#" id="pay-annual">Pending (contact us)</a>
         </div>
       </div>
