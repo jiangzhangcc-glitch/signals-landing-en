@@ -10,7 +10,7 @@
   body { font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif; margin:0; background:var(--bg); color:var(--text); line-height:1.7; }
   header { background:#fff; border-bottom:1px solid var(--line); padding:14px 20px; display:flex; align-items:center; gap:12px; }
   header h1 { font-size:18px; margin:0; }
-  .wrap { max-width:920px; margin:0 auto; padding:0 20px; }
+  .wrap { max-width:75%; margin:0 auto; padding:0 20px; }
   .hero { text-align:center; padding:64px 20px 48px; background:linear-gradient(180deg,#fff 0%,#f6f8fa 100%); }
   .hero h2 { font-size:34px; margin:0 0 14px; }
   .hero p { color:var(--muted); font-size:16px; max-width:680px; margin:0 auto 26px; }
@@ -28,9 +28,10 @@
   .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px; }
   .card h4 { margin:0 0 8px; font-size:16px; }
   .card p { margin:0; color:var(--muted); font-size:13px; }
-  .feature { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:22px 24px; margin:14px 0; }
+  .feature { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:22px 24px; }
   .feature h4 { margin:0 0 10px; font-size:17px; }
   .feature p { margin:0; color:var(--text); font-size:14px; }
+  .features-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
   .badge { display:inline-block; border-radius:10px; font-size:11px; padding:1px 8px; margin-right:6px; }
   .b-blue { background:#ddf4ff; color:var(--blue); } .b-green { background:#dafbe1; color:var(--green); }
   .b-orange { background:#fff1d6; color:var(--orange); } .b-gray { background:#f0f0f0; color:#444; }
@@ -45,16 +46,17 @@
   .lang-switch { margin-left:auto; display:flex; gap:6px; align-items:center; }
   .lang-switch a { text-decoration:none; font-size:13px; font-weight:600; padding:4px 10px; border-radius:6px; border:1px solid var(--line); color:var(--muted); background:#fff; }
   .lang-switch a.active { background:var(--blue); color:#fff; border-color:var(--blue); }
-  details.delivery { background:var(--card); border:1px solid var(--line); border-radius:8px; margin:10px 0; }
+  details.delivery { background:var(--card); border:1px solid var(--line); border-radius:8px; }
   details.delivery summary { cursor:pointer; padding:16px 20px; font-weight:600; font-size:15px; list-style:none; }
   details.delivery summary::before { content:"▸ "; color:var(--blue); }
   details.delivery[open] summary::before { content:"▾ "; }
   details.delivery .d-body { padding:0 20px 18px; color:var(--muted); font-size:14px; }
+  .delivery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:start; }
   .pay-tier { border:1px solid var(--line); border-radius:8px; padding:14px; text-align:center; margin:8px 0; }
   .pay-tier .tier-name { font-size:14px; font-weight:700; }
   .pay-tier .tier-price { font-size:18px; font-weight:700; color:var(--blue); margin:4px 0; }
   .pay-tier a { display:inline-block; margin-top:6px; text-decoration:none; font-weight:600; font-size:13px; color:#fff; background:var(--blue); padding:6px 16px; border-radius:6px; }
-  @media (max-width:760px) { .grid,.grid2,.grid3 { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } }
+  @media (max-width:760px) { .grid,.grid2,.grid3,.features-grid,.delivery-grid { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } .wrap { max-width:92%; } }
 </style>
 </head>
 <body>
@@ -89,7 +91,7 @@
   <section>
     <h3>Four highlights</h3>
     <p class="sub">What happened in AI in the last 24h? Where does the timeline live? Are the signals real? Is the data an asset? Human-readable and machine-readable?</p>
-
+    <div class="features-grid">
     <div class="feature">
       <h4>🔗 Traceability · Are the signals real?</h4>
       <p>The AI world produces enormous information daily, but most of it gets distorted through secondhand retelling and clickbait. Signals API's first principle: every signal leads back to its source. We pull from GitHub repository pages, HuggingFace model cards, original YouTube videos and Silicon Valley feeds — each signal carries its original URL, publish time and publisher. Click once and you're at the source, with no middleman interpretation. Why does this matter? In a field with extreme information distortion, "who said it" and "where it came from" are the anchor of value. Use publish time to judge freshness, publisher to judge credibility, and the original link for deeper research. For researchers, traceability means every citation is verifiable. For investors, it means decisions withstand scrutiny. For creators, it means you can cite with confidence. We don't produce opinions — we deliver verifiable facts, with "back to the source" as the default behavior of the product.</p>
@@ -109,6 +111,7 @@
       <h4>🤖 Machine-readable · Is the data an asset?</h4>
       <p>Information products come in two kinds: for humans and for machines. Signals API does both — a visual dashboard for humans, plus a JSON API and CSV/JSON export for machines. Why is machine readability a necessity? Because in real workflows, "humans" shouldn't be the only consumer: quant teams feed signals into models, researchers import data into analysis tools, content teams batch-fetch topics, founders monitor competitors — all of these need structured data, not screenshots. Our API provides query endpoints filtered by company, topic, source, type and time, returning standard JSON with stable fields and uniform formatting, ready to plug into your code. History supports batch retrieval by date, and one-click export for offline analysis. For humans, a dashboard; for machines, an API; for workflows, exports. Human-readable and machine-readable — that's what makes it a true data asset.</p>
     </div>
+    </div>
   </section>
 
   <section id="demo">
@@ -116,6 +119,7 @@
     <p class="sub">👇 Try it online (real collected data, nothing to install) | self-hosted adds history archive &amp; full API</p>
     <p style="text-align:center;margin:10px 0 18px">
       <a class="btn btn-primary" href="https://jiangzhangcc-glitch.github.io/signals-api-demo/" target="_blank">🎯 Open the live demo dashboard</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('api-panel').style.display='block';this.style.display='none'">🔧 Developer API</a>
     </p>
     <p style="margin-top:14px;color:var(--muted);font-size:13px">
       <span class="badge b-blue">Dashboard</span>Visual panel in the browser, filter &amp; history included
@@ -124,7 +128,7 @@
     </p>
   </section>
 
-  <section id="api">
+  <section id="api" style="display:none">
     <h3>Developer API · plug into your workflow</h3>
     <p class="sub">Standard JSON endpoints with stable fields — that's what "API" in our name means.</p>
     <div class="demo" style="font-size:12px">
@@ -152,6 +156,7 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
 
   <section>
     <h3>Delivery options</h3>
+    <div class="delivery-grid">
     <details class="delivery" open>
       <summary>A. Hosted</summary>
       <div class="d-body">We run and maintain everything and hand you an HTTP endpoint. You just get the URL and access credentials — collection, updates and availability are on us. Best for buyers who want data without touching code.</div>
@@ -164,6 +169,7 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       <summary>C. One-time data pack</summary>
       <div class="d-body">Full history as JSON/CSV, buy once, no ongoing service. Best for buyers who only need historical data for offline analysis. The data is yours forever after delivery.</div>
     </details>
+    </div>
   </section>
 
   <section id="contact">
@@ -187,7 +193,7 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       </tr>
     </table>
     <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Other payment methods (WeChat · cards)</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Other payment methods (WeChat)</a>
     </p>
     <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
       <h4 style="margin:0 0 6px;font-size:16px">💰 Other payment methods</h4>
