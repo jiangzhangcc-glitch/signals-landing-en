@@ -62,7 +62,6 @@
 <body>
 <header>
   <h1>📡 Signals API</h1>
-  <span style="color:var(--muted);font-size:13px">AI Signal Feed · 4 sources auto-aggregated daily</span>
   <div class="lang-switch">
     <a href="https://signals.jiangzhang.ca/">中文</a>
     <a href="https://jiangzhangcc-glitch.github.io/signals-landing-en/" class="active">EN</a>
@@ -119,7 +118,7 @@
     <p class="sub">👇 Try it online (real collected data, nothing to install) | self-hosted adds history archive &amp; full API</p>
     <p style="text-align:center;margin:10px 0 18px">
       <a class="btn btn-primary" href="https://jiangzhangcc-glitch.github.io/signals-api-demo/" target="_blank">🎯 Open the live demo dashboard</a>
-      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('api-panel').style.display='block';this.style.display='none'">🔧 Developer API</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="togglePanel('api-panel', this)">🔧 Developer API</a>
     </p>
     <p style="margin-top:14px;color:var(--muted);font-size:13px">
       <span class="badge b-blue">Dashboard</span>Visual panel in the browser, filter &amp; history included
@@ -128,7 +127,7 @@
     </p>
   </section>
 
-  <section id="api" style="display:none">
+  <section id="api-panel" style="display:none">
     <h3>Developer API · plug into your workflow</h3>
     <p class="sub">Standard JSON endpoints with stable fields — that's what "API" in our name means.</p>
     <div class="demo" style="font-size:12px">
@@ -161,11 +160,11 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       <summary>A. Hosted</summary>
       <div class="d-body">We run and maintain everything and hand you an HTTP endpoint. You just get the URL and access credentials — collection, updates and availability are on us. Best for buyers who want data without touching code.</div>
     </details>
-    <details class="delivery">
+    <details class="delivery" open>
       <summary>B. Self-hosted</summary>
       <div class="d-body">Full source code + scripts, data stays entirely on your machine. We deliver the complete codebase with one-click startup scripts (collection, API server, dashboard) for you to deploy on your own server — data never leaves your network. Best for teams with IT capacity and data-sovereignty requirements.</div>
     </details>
-    <details class="delivery">
+    <details class="delivery" open>
       <summary>C. One-time data pack</summary>
       <div class="d-body">Full history as JSON/CSV, buy once, no ongoing service. Best for buyers who only need historical data for offline analysis. The data is yours forever after delivery.</div>
     </details>
@@ -181,7 +180,7 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
     <h3>Subscription plans</h3>
     <table>
       <tr><th></th><th>Basic</th><th class="hot">Standard</th><th>Annual</th></tr>
-      <tr><td><b>Price</b></td><td><span class="price">CA$15</span>/mo</td><td class="hot"><span class="price">CA$40</span>/mo</td><td><span class="price">CA$299</span>/yr</td></tr>
+      <tr><td><b>Price</b></td><td><span class="price">CA$9.9</span>/mo</td><td class="hot"><span class="price">CA$29.9</span>/mo</td><td><span class="price">CA$299</span>/yr</td></tr>
       <tr><td>Data scope</td><td>Daily push</td><td class="hot">Daily push + history archive</td><td>Daily push + history archive + full-year export</td></tr>
       <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
       <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
@@ -193,22 +192,16 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       </tr>
     </table>
     <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Other payment methods (WeChat)</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="togglePanel('pay-panel', this)">Other payment methods (WeChat)</a>
     </p>
     <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
       <h4 style="margin:0 0 6px;font-size:16px">💰 Other payment methods</h4>
-      <p style="color:var(--muted);font-size:12px;margin:0 0 14px">For subscriptions use "Pay now" in the table above; below are WeChat and international card options.</p>
+      <p style="color:var(--muted);font-size:12px;margin:0 0 14px">For subscriptions use "Pay now" in the table above; below is the WeChat payment channel.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px">WeChat Pay (CN)</div>
           <img src="pay_wechat.png" alt="WeChat QR" style="width:150px;height:auto;border-radius:6px">
           <div style="color:var(--muted);font-size:12px;margin-top:6px">Scan to pay</div>
-        </div>
-        <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
-          <div style="font-size:13px;font-weight:600;margin-bottom:8px">International</div>
-          <div style="font-size:24px">💳</div>
-          <div style="color:var(--muted);font-size:12px;margin-top:6px">Credit | Master | Debit | PayPal</div>
-          <a id="pay-overseas" href="https://buy.stripe.com/6oU3cv4W0366aKkfgLgw000?locale=en" target="_blank" style="color:var(--blue);font-size:13px;font-weight:600">Pay now →</a>
         </div>
       </div>
       <p style="color:var(--muted);font-size:12px;margin:14px 0 0">Activation is automatic after payment.</p>
@@ -221,5 +214,13 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
     Signals API · 2026
   </div>
 </div>
+<script>
+function togglePanel(id, btn) {
+  var p = document.getElementById(id);
+  var hidden = p.style.display === 'none' || !p.style.display;
+  p.style.display = hidden ? 'block' : 'none';
+  if (btn) btn.textContent = hidden ? btn.textContent.replace('(WeChat)', '(collapse)') : btn.textContent.replace('(collapse)', '(WeChat)');
+}
+</script>
 </body>
 </html>
