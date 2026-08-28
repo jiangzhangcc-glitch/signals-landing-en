@@ -180,30 +180,19 @@ $ curl "https://signals.jiangzhang.ca/api/signals?company=OpenAI&limit=5"<br>
       <tr><td>API access</td><td>/api/signals</td><td class="hot">All endpoints</td><td>All endpoints + raw exports</td></tr>
       <tr><td>History query</td><td>—</td><td class="hot">✅ /api/archive</td><td>✅ + offline files</td></tr>
       <tr><td>Support</td><td>Email</td><td class="hot">Email + setup help</td><td>Dedicated</td></tr>
+      <tr><td><b>Buy</b></td>
+        <td><a href="https://buy.stripe.com/6oU3cv4W0366aKkfgLgw000?locale=en" target="_blank" style="font-size:12px;color:var(--blue);font-weight:600">Pay now →</a></td>
+        <td class="hot"><a href="https://buy.stripe.com/aFa8wPdswgWWbOoecHgw001?locale=en" target="_blank" style="font-size:12px;color:var(--blue);font-weight:600">Pay now →</a></td>
+        <td><a href="https://buy.stripe.com/5kQeVd0FK8qq2dO5Gbgw002?locale=en" target="_blank" style="font-size:12px;color:var(--blue);font-weight:600">Pay now →</a></td>
+      </tr>
     </table>
     <p style="margin-top:18px;text-align:center">
-      <a class="btn btn-primary" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Pay</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="document.getElementById('pay-panel').style.display='block';this.style.display='none'">Other payment methods (WeChat · cards)</a>
     </p>
     <div id="pay-panel" style="display:none;max-width:600px;margin:16px auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px">
-      <h4 style="margin:0 0 6px;font-size:16px">💰 Choose a plan</h4>
+      <h4 style="margin:0 0 6px;font-size:16px">💰 Other payment methods</h4>
+      <p style="color:var(--muted);font-size:12px;margin:0 0 14px">For subscriptions use "Pay now" in the table above; below are WeChat and international card options.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px">
-          <div style="font-size:13px;font-weight:700">Basic</div>
-          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$15/mo</div>
-          <a href="https://buy.stripe.com/6oU3cv4W0366aKkfgLgw000?locale=en" target="_blank">Pay now →</a>
-        </div>
-        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff8c5">
-          <div style="font-size:13px;font-weight:700">Standard</div>
-          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$40/mo</div>
-          <a href="https://buy.stripe.com/aFa8wPdswgWWbOoecHgw001?locale=en" target="_blank" id="pay-standard">Pay now →</a>
-        </div>
-        <div style="flex:1;min-width:160px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:14px">
-          <div style="font-size:13px;font-weight:700">Annual</div>
-          <div style="font-size:18px;font-weight:700;color:var(--blue);margin:4px 0">CA$300/yr</div>
-          <a href="https://buy.stripe.com/5kQeVd0FK8qq2dO5Gbgw002?locale=en" target="_blank" id="pay-annual">Pay now →</a>
-        </div>
-      </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
         <div style="flex:1;min-width:150px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px">WeChat Pay (CN)</div>
           <img src="pay_wechat.png" alt="WeChat QR" style="width:150px;height:auto;border-radius:6px">
