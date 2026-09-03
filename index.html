@@ -57,6 +57,17 @@
   .pay-tier .tier-price { font-size:18px; font-weight:700; color:var(--blue); margin:4px 0; }
   .pay-tier a { display:inline-block; margin-top:6px; text-decoration:none; font-weight:600; font-size:13px; color:#fff; background:var(--blue); padding:6px 16px; border-radius:6px; }
   @media (max-width:760px) { .grid,.grid2,.grid3,.features-grid,.delivery-grid { grid-template-columns:1fr; } .hero h2 { font-size:26px; } #pricing table { width:100%; } .wrap { max-width:92%; } }
+  /* Dark theme (button beside language switch; localStorage signals_theme, follows system) */
+  html[data-theme="dark"] { --bg:#0a0a0a; --card:#161616; --line:#2b2b2b; --text:#e6e6e6; --muted:#9a9a9a; --blue:#e6e6e6; --green:#3fb950; --orange:#e3b341; }
+  html[data-theme="dark"] body { background:var(--bg); color:var(--text); }
+  html[data-theme="dark"] header, html[data-theme="dark"] .hero, html[data-theme="dark"] section { background:transparent; }
+  html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] h4 { color:var(--text); }
+  html[data-theme="dark"] .card { background:var(--card); border-color:var(--line); color:var(--text); }
+  html[data-theme="dark"] #pricing table, html[data-theme="dark"] #pricing td, html[data-theme="dark"] #pricing th { background:var(--card); border-color:var(--line); color:var(--text); }
+  html[data-theme="dark"] .lang-switch a, html[data-theme="dark"] .btn-ghost { background:var(--card); color:var(--text); border-color:var(--line); }
+  html[data-theme="dark"] a { color:var(--text); text-decoration-color:#58a6ff; }
+  html[data-theme="dark"] .foot { border-color:var(--line); color:var(--muted); }
+  html[data-theme="dark"] .d-body { color:var(--text); }
 </style>
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,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">
 </head>
@@ -66,6 +77,8 @@
   <div class="lang-switch">
     <a href="https://signals.jiangzhang.ca/">中文</a>
     <a href="https://jiangzhangcc-glitch.github.io/signals-landing-en/" class="active">EN</a>
+    <button id="btn-theme" onclick="toggleTheme()" title="Toggle light/dark theme"
+      style="background:none;border:1px solid var(--line);border-radius:6px;color:var(--text);padding:2px 10px;cursor:pointer;font-size:13px;">🌙</button>
   </div>
 </header>
 
@@ -172,6 +185,27 @@ function togglePanel(id, btn) {
   p.style.display = hidden ? 'block' : 'none';
   if (btn) btn.textContent = hidden ? btn.textContent.replace('(WeChat)', '(collapse)') : btn.textContent.replace('(collapse)', '(WeChat)');
 }
+</script>
+<script>
+// Light/dark theme (button beside language switch; localStorage signals_theme, follows system)
+(function () {
+  let th = null;
+  try { th = localStorage.getItem("signals_theme"); } catch (e) {}
+  if (th !== "dark" && th !== "light") {
+    th = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  function apply() {
+    document.documentElement.setAttribute("data-theme", th);
+    const b = document.getElementById("btn-theme");
+    if (b) b.textContent = th === "dark" ? "☀️" : "🌙";
+  }
+  window.toggleTheme = function () {
+    th = th === "dark" ? "light" : "dark";
+    try { localStorage.setItem("signals_theme", th); } catch (e) {}
+    apply();
+  };
+  apply();
+})();
 </script>
 </body>
 </html>
