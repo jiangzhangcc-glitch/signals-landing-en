@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subscribe — Signals 4 · Free Daily Digest</title>
+</head>
+<body style="margin:0;background:#f2f4f8;font-family:-apple-system,'Segoe UI',Arial,sans-serif;color:#1f2328;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f4f8;padding:40px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #e3e6ec;border-radius:12px;overflow:hidden;">
+        <tr><td style="background:#1f2328;color:#ffffff;padding:18px 26px;">
+          <div style="font-size:17px;font-weight:700;">Signals 4 <span style="font-weight:400;font-size:12px;color:#aab0b8;">· Free Daily Digest</span></div>
+        </td></tr>
+        <tr><td style="padding:26px;">
+          <div style="font-size:21px;font-weight:700;">4 signals a day. One from each core source.</div>
+          <div style="font-size:14px;line-height:1.7;color:#3a3f47;margin-top:8px;">
+            Every day you get <b>4 signals</b> — one each from <b>GitHub, Hugging Face, YouTube and Silicon Valley</b> — with a one-line takeaway and the original link. Free, straight to your inbox.
+          </div>
+          <div style="margin-top:18px;">
+            <input id="email" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;padding:11px 12px;font-size:14px;border:1px solid #d0d7de;border-radius:6px;" />
+            <button onclick="subscribeDemo()" style="margin-top:10px;width:100%;box-sizing:border-box;background:#1f2328;color:#ffffff;border:0;font-size:14px;font-weight:600;padding:11px;border-radius:6px;cursor:pointer;">Subscribe — it's free</button>
+          </div>
+          <div id="ok" style="display:none;margin-top:14px;background:#e8f6ec;border:1px solid #b7e0c2;color:#1a7f37;border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.6;">
+            Please check your inbox to confirm your subscription (confirmation email on its way).&nbsp;&nbsp;You can
+            <a href="javascript:void(0)" onclick="closeWin()" style="color:inherit;text-decoration:underline;cursor:pointer;">close</a>
+            this window now.
+          </div>
+          <div style="font-size:11px;color:#8b949e;margin-top:16px;line-height:1.6;">
+            We only use your email to send this daily digest. No spam, no sharing — unsubscribe anytime with one click.
+          </div>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+  <script>
+    function subscribeDemo() {
+      var e = document.getElementById('email').value.trim();
+      if (!e || e.indexOf('@') < 1) { alert('Please enter a valid email address.'); return; }
+      document.getElementById('ok').style.display = 'block';
+    }
+    function closeWin() {
+      // 浏览器只允许关闭“由脚本打开的窗口”；主标签页会被拦截 —— 拦截时提示手动关闭
+      try { window.open('', '_self'); window.close(); } catch (err) {}
+      setTimeout(function () {
+        var ok = document.getElementById('ok');
+        if (ok) { ok.style.display = 'none'; }
+        alert('Your browser blocked auto-close. You can close this tab manually — you are all set.');
+      }, 250);
+    }
+  </script>
+  <!-- ===== 说明（存稿，不渲染）=====
+  - 这是“再订阅动作页”样稿（纯前端演示，不接后端）。
+  - 生产落地：signals.jiangzhang.ca/subscribe → 真实 opt-in 订阅（存列表 + 发确认邮件 + 每日自动发 Signals 4）。
+  - 中英双语：本样稿英文为主；若做中文版，词表见 marketing/docs/MARKETING_CONCEPTS_101.md §四 对照。
+  ===== -->
+</body>
+</html>
