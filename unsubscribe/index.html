@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unsubscribed — Signals API</title>
+</head>
+<body style="margin:0;background:#f2f4f8;font-family:-apple-system,'Segoe UI',Arial,sans-serif;color:#1f2328;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f4f8;padding:40px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #e3e6ec;border-radius:12px;overflow:hidden;">
+        <tr><td style="background:#1f2328;color:#ffffff;padding:18px 26px;">
+          <div style="font-size:17px;font-weight:700;">Signals 4 <span style="font-weight:400;font-size:12px;color:#aab0b8;">· Free Daily Digest</span></div>
+        </td></tr>
+        <tr><td style="padding:26px;">
+          <div style="font-size:22px;font-weight:700;">You're unsubscribed.</div>
+          <div style="font-size:14px;line-height:1.7;color:#3a3f47;margin-top:12px;">
+            You have been removed from <b>Signals 4 — Free Daily Digest</b>.<br>
+            You will no longer receive this daily email.
+          </div>
+          <div style="font-size:13px;color:#57606a;line-height:1.7;margin-top:16px;">
+            Changed your mind? You can
+            <a href="https://jiangzhangcc-glitch.github.io/signals-landing-en/subscribe/" style="color:#0969da;text-decoration:underline;font-weight:600;">subscribe again</a>
+            anytime.
+          </div>
+          <div style="font-size:12px;color:#8b949e;margin-top:22px;">
+            Questions? Write to <a href="mailto:support@jiangzhang.ca" style="color:#8b949e;">support@jiangzhang.ca</a>
+          </div>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+  <!-- ===== 设计与实现说明（存稿，不渲染） =====
+  1) 文案为 owner 定稿（2026-09-05）。
+  2) 「subscribe again」→ 样稿阶段指向本地 Subscribe_page.html（同目录，离线可点）；
+     生产上线时指向 signals.jiangzhang.ca/subscribe（真实 opt-in 再订阅页，待实施创建——现尚未建，点线上会 404）。
+  3) 生产：Unsubscribe/Resubscribe 链接均用签名参数防他人代操作；退订即时生效，仅停免费日报，
+     付费订阅事务邮件不受影响。
+  中文对照（存稿）：您已退订。/ 您已从 Signals 4 — 免费每日简报中移除，不再收到该邮件。/
+  想重新订阅？随时可在 signals.jiangzhang.ca 订阅。/ 疑问请联系 support@jiangzhang.ca
+  ===== -->
+</body>
+</html>
