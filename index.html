@@ -180,13 +180,12 @@ function togglePanel(id, btn) {
 }
 </script>
 <script>
-// Light/dark theme (button beside language switch; localStorage signals_theme, follows system)
+// Light/dark theme (EN landing: default LIGHT by design — does NOT follow system
+// dark pref, and uses its own localStorage key signals_theme_en so zh/en stay independent)
 (function () {
   let th = null;
-  try { th = localStorage.getItem("signals_theme"); } catch (e) {}
-  if (th !== "dark" && th !== "light") {
-    th = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
-  }
+  try { th = localStorage.getItem("signals_theme_en"); } catch (e) {}
+  if (th !== "dark" && th !== "light") th = "light";
   function apply() {
     document.documentElement.setAttribute("data-theme", th);
     const b = document.getElementById("btn-theme");
@@ -194,7 +193,7 @@ function togglePanel(id, btn) {
   }
   window.toggleTheme = function () {
     th = th === "dark" ? "light" : "dark";
-    try { localStorage.setItem("signals_theme", th); } catch (e) {}
+    try { localStorage.setItem("signals_theme_en", th); } catch (e) {}
     apply();
   };
   apply();
