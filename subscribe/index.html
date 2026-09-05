@@ -26,6 +26,7 @@
             <a href="javascript:void(0)" onclick="closeWin()" style="color:inherit;text-decoration:underline;cursor:pointer;">close</a>
             this window now.
           </div>
+          <div id="err" style="display:none;margin-top:14px;background:#ffeef0;border:1px solid #f0b3ba;color:#cf222e;border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.6;"></div>
           <div style="font-size:11px;color:#8b949e;margin-top:16px;line-height:1.6;">
             We only use your email to send this daily digest. No spam, no sharing — unsubscribe anytime with one click.
           </div>
@@ -34,19 +35,30 @@
     </td></tr>
   </table>
   <script>
-    function subscribeDemo() {
+    async function subscribeDemo() {
       var e = document.getElementById('email').value.trim();
       if (!e || e.indexOf('@') < 1) { alert('Please enter a valid email address.'); return; }
-      document.getElementById('ok').style.display = 'block';
+      var err = document.getElementById('err');
+      if (err) err.style.display = 'none';
+      try {
+        var resp = await fetch('https://data.jiangzhang.ca/signals4/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: e })
+        });
+        var data = await resp.json();
+        if (data && data.ok) {
+          document.getElementById('ok').style.display = 'block';
+        } else {
+          if (err) { err.style.display = 'block'; err.textContent = (data && data.error) || 'Something went wrong. Please try again.'; }
+        }
+      } catch (ex) {
+        if (err) { err.style.display = 'block'; err.textContent = 'Network error — please try again.'; }
+      }
     }
     function closeWin() {
-      // 浏览器只允许关闭“由脚本打开的窗口”；主标签页会被拦截 —— 拦截时提示手动关闭
-      try { window.open('', '_self'); window.close(); } catch (err) {}
-      setTimeout(function () {
-        var ok = document.getElementById('ok');
-        if (ok) { ok.style.display = 'none'; }
-        alert('Your browser blocked auto-close. You can close this tab manually — you are all set.');
-      }, 250);
+      try { window.open('', '_self'); window.close(); } catch (err2) {}
+      setTimeout(function () { alert('Your browser blocked auto-close. You can close this tab manually — you are all set.'); }, 250);
     }
   </script>
   <!-- ===== 说明（存稿，不渲染）=====
