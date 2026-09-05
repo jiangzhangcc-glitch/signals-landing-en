@@ -155,6 +155,21 @@
     
   </section>
 
+  <section id="free">
+    <h3>Signals 4 — Free Daily Digest</h3>
+    <p class="sub">4 signals a day, one from each core source (GitHub · Hugging Face · YouTube · Silicon Valley). Free — unsubscribe anytime.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:16px auto 0;">
+      <input id="free-email" type="email" placeholder="you@example.com" autocomplete="email"
+             style="flex:1;min-width:240px;padding:11px 12px;font-size:14px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--text);">
+      <button onclick="subscribeFree()" style="background:#1f2328;color:#ffffff;border:0;padding:11px 18px;font-weight:600;border-radius:6px;cursor:pointer;font-size:14px;">Subscribe — it's free</button>
+    </div>
+    <div id="free-ok" style="display:none;margin:12px auto 0;max-width:520px;padding:11px 14px;background:#e8f6ec;border:1px solid #b7e0c2;color:#1a7f37;border-radius:8px;font-size:13px;line-height:1.6;">
+      Please check your inbox to confirm your subscription (confirmation email on its way).&nbsp;&nbsp;You can
+      <a href="javascript:void(0)" onclick="closeFreeWin()" style="color:inherit;text-decoration:underline;cursor:pointer;">close</a> this window now.
+    </div>
+    <div id="free-err" style="display:none;margin:12px auto 0;max-width:520px;padding:11px 14px;background:#ffeef0;border:1px solid #f0b3ba;color:#cf222e;border-radius:8px;font-size:13px;line-height:1.6;"></div>
+  </section>
+
   <section id="faq">
     <h3>FAQ</h3>
     <div class="grid2" style="gap:10px">
@@ -198,6 +213,24 @@ function togglePanel(id, btn) {
   };
   apply();
 })();
+</script>
+<script>
+async function subscribeFree() {
+  var e = document.getElementById('free-email').value.trim();
+  var err = document.getElementById('free-err');
+  if (!e || e.indexOf('@') < 1) { err.style.display = 'block'; err.textContent = 'Please enter a valid email address.'; return; }
+  err.style.display = 'none';
+  try {
+    var resp = await fetch('https://data.jiangzhang.ca/signals4/subscribe', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: e })
+    });
+    var data = await resp.json();
+    if (data && data.ok) { document.getElementById('free-ok').style.display = 'block'; }
+    else { err.style.display = 'block'; err.textContent = (data && data.error) || 'Something went wrong. Please try again.'; }
+  } catch (ex) { err.style.display = 'block'; err.textContent = 'Network error — please try again.'; }
+}
+function closeFreeWin() { try { window.open('', '_self'); window.close(); } catch (e2) {} }
 </script>
 </body>
 </html>
