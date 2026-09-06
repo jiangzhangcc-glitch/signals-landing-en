@@ -37,6 +37,7 @@
   <script>
     async function subscribeDemo() {
       var e = document.getElementById('email').value.trim();
+      var src = new URLSearchParams(location.search).get('src');
       if (!e || e.indexOf('@') < 1) { alert('Please enter a valid email address.'); return; }
       var err = document.getElementById('err');
       if (err) err.style.display = 'none';
@@ -44,7 +45,7 @@
         var resp = await fetch('https://data.jiangzhang.ca/signals4/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: e })
+          body: JSON.stringify({ email: e, src: src || null })
         });
         var data = await resp.json();
         if (data && data.ok) {
