@@ -230,13 +230,14 @@ function togglePanel(id, btn) {
 <script>
 async function subscribeFree() {
   var e = document.getElementById('free-email').value.trim();
+  var src = new URLSearchParams(location.search).get('src');
   var err = document.getElementById('free-err');
   if (!e || e.indexOf('@') < 1) { err.style.display = 'block'; err.textContent = 'Please enter a valid email address.'; return; }
   err.style.display = 'none';
   try {
     var resp = await fetch('https://data.jiangzhang.ca/signals4/subscribe', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: e })
+      body: JSON.stringify({ email: e, src: src || null })
     });
     var data = await resp.json();
     if (data && data.ok) { document.getElementById('free-ok').style.display = 'block'; }
@@ -246,13 +247,14 @@ async function subscribeFree() {
 function closeFreeWin() { try { window.open('', '_self'); window.close(); } catch (e2) {} }
 async function subscribeFreeTop() {
   var e = document.getElementById('free2-email').value.trim();
+  var src = new URLSearchParams(location.search).get('src');
   var err = document.getElementById('free2-err');
   if (!e || e.indexOf('@') < 1) { err.style.display = 'block'; err.textContent = 'Please enter a valid email address.'; return; }
   err.style.display = 'none';
   try {
     var resp = await fetch('https://data.jiangzhang.ca/signals4/subscribe', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: e })
+      body: JSON.stringify({ email: e, src: src || null })
     });
     var data = await resp.json();
     if (data && data.ok) { document.getElementById('free2-ok').style.display = 'block'; }
